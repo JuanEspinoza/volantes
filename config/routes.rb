@@ -1,7 +1,17 @@
 Volantes::Application.routes.draw do 
 
+  resources :branches do
+    resources :flyers
+  end
+
+  resources :user do
+    resources :branches
+  end
+
+  resources :flyers
 
   devise_for :users
+
 
   resources :flyer_users
 
@@ -14,10 +24,6 @@ Volantes::Application.routes.draw do
 
   resources :branches
 
-
-  resources :flyers
-
-
   resources :telephones
 
 
@@ -28,21 +34,20 @@ Volantes::Application.routes.draw do
 
   resources :starting
 
-  root to:  "starting#index"
-
   devise_scope :user do
 
-    authenticated :user do
-    root :to => "flyer_users#index"
-    end
+  authenticated :user do
+   root :to => "user_filter#filter_by_role"
+  end
 
 
   # Not logged in
-    root to: "starting#index"
+  root to: "starting#index"
 
 
   match '/sign_in',  to: 'starting#index',         via: 'get'
   match '/sign_out', to: 'devise/sessions#destroy',     via: 'delete'
+  match '/images/:filename.:extension' => 'image#serve'
 
   # get "sign_in", :to => "devise/sessions#new"
   # get "sign_out", :to => "devise/sessions#destroy"
