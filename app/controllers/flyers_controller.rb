@@ -2,10 +2,10 @@ class FlyersController < ApplicationController
   # GET /flyers
   # GET /flyers.json
   def index
-    @flyers = Flyer.all
+    @flyers = Flyer.where("branch_id = #{params[:branch_id]}")
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index_.html.erb
       format.json { render json: @flyers }
     end
   end

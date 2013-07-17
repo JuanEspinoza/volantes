@@ -1,5 +1,16 @@
 Volantes::Application.routes.draw do 
-  resources :users
+
+  resources :branches do
+    resources :flyers
+  end
+
+  resources :user do
+    resources :branches
+  end
+
+  resources :flyers
+
+  devise_for :users
 
 
   resources :flyer_users
@@ -13,10 +24,6 @@ Volantes::Application.routes.draw do
 
   resources :branches
 
-
-  resources :flyers
-
-
   resources :telephones
 
 
@@ -25,8 +32,27 @@ Volantes::Application.routes.draw do
 
   resources :companies
 
+  resources :starting
+
+  devise_scope :user do
+
+  authenticated :user do
+   root :to => "user_filter#filter_by_role"
+  end
+
+
+  # Not logged in
   root to: "starting#index"
 
+
+  match '/sign_in',  to: 'starting#index',         via: 'get'
+  match '/sign_out', to: 'devise/sessions#destroy',     via: 'delete'
+  match '/images/:filename.:extension' => 'image#serve'
+
+  # get "sign_in", :to => "devise/sessions#new"
+  # get "sign_out", :to => "devise/sessions#destroy"
+  # get "registrations", to: "devise/registrations#new"
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -76,7 +102,7 @@ Volantes::Application.routes.draw do
   #   end
 
   # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
+  # just remember to delete public/index_.html.
   # root :to => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"

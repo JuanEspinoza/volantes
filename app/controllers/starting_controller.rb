@@ -1,10 +1,10 @@
 class StartingController < ApplicationController
-  # GET /flyers
-  # GET /flyers.json
+  skip_before_filter :authenticate_user!
+  
   def index
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
     end
   end
 

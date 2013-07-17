@@ -1,0 +1,12 @@
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <a class="brand" href="#">Volantes</a>
+    <ul class="nav">
+      <li class="active"><a href="/">Home</a></li>
+      <li><a href="#">Link</a></li>
+        <% if current_user %>
+            <li><%= link_to t('sign_out'), sign_out_path, method: "delete" %></li>
+        <% end %>
+    </ul>
+  </div>
+</div>

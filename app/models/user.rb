@@ -1,8 +1,26 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, :first_name, :last_name, :password, :username
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :company_users
-  has_many :flyer_users
-  has_many :companies, through: :company_users
-  has_many :flyers, through: :flyer_users
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :role_id
+  # attr_accessible :title, :body
+
+
+  belongs_to :role
+  
+  has_one :company
+
+  # To see current_user in Models
+  def self.current
+    Thread.current[:user]
+  end
+
+  def self.current=(user)
+    Thread.current[:user] = user
+  end
+
 end
