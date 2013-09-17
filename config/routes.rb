@@ -34,6 +34,11 @@ Volantes::Application.routes.draw do
 
   resources :starting
 
+  resources :about
+
+  match 'contact' => 'contact#new', :as => 'contact', :via => :get
+  match 'contact' => 'contact#create', :as => 'contact', :via => :post
+
   devise_scope :user do
 
   authenticated :user do

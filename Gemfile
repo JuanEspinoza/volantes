@@ -27,7 +27,7 @@ gem 'acts-as-taggable-on'
 
 gem 'devise'
 gem 'cancan'
-gem "paperclip"
+gem 'paperclip'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

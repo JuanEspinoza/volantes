@@ -1,4 +1,4 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+# Read index fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
   postal_code: MyString

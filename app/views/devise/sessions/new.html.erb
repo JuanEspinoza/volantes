@@ -1,18 +1,37 @@
-<h2>Sign in</h2>
+ <div style="height: 500px;width: 1024px">
+    <table align="center">
+          <tr>
+                <td>
+                    <h2>Sign in</h2>
+                    <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+                    <div class="form-inputs">
 
-<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
+                        <%= devise_error_messages! %>
 
-      <%= devise_error_messages! %>
+                        <%= f.text_field :email,required:true,autofocus: true, placeholder:"Email",class:"span2" %>
+                        <%= f.password_field :password,required:true, placeholder:"Password", class:"span2" %>
 
-    <%= f.input :email, required: true, :autofocus => true %>
-    <%= f.input :password, required: true %>
-    <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
-  </div>
+                    </div>
 
-  <div class="">
-    <%= f.button :submit, "Sign in", class: "btn"%>
-  </div>
-<% end %>
+                    <div class="">
+                        <%= f.button :submit, "Sign in", class: "btn"%>
+                    </div>
+                        <div>
 
-<%= render "devise/shared/links" %>
+                        <% if devise_mapping.rememberable? -%>
+                            <%= f.check_box :remember_me, {:checked => "checked"}, :style => 'vertical-align: middle; display: inline-block;'%>
+                            <%= f.label :remember_me, 'Remember Me', :style => 'vertical-align: middle; display: inline-block;' %>
+                        <% end -%>
+                        </div>
+                <% end %>
+
+                    <%= render "devise/shared/links" %>
+
+                </td>
+
+          </tr>
+
+
+     </table>
+
+ </div>
